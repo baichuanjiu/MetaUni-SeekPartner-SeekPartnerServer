@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  leaflet.api:
+    image: ${DOCKER_REGISTRY-}leafletapi
+    build:
+      context: .
+      dockerfile: Leaflet.API/Dockerfile
+    ports:
+      - 50064:80
+      - 50065:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Leaflet.API.50064
+      Consul__Name: SeekPartner.Leaflet.API
+      Consul__IP: host.docker.internal
+      Consul__Port: 50064
+
+  leaflet.api2:
+    image: ${DOCKER_REGISTRY-}leafletapi
+    build:
+      context: .
+      dockerfile: Leaflet.API/Dockerfile
+    ports:
+      - 50066:80
+      - 50067:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Leaflet.API.50066
+      Consul__Name: SeekPartner.Leaflet.API
+      Consul__IP: host.docker.internal
+      Consul__Port: 50066
